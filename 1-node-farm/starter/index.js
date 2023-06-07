@@ -15,13 +15,17 @@ const url =require('url');
 // fs.writeFile('./txt/avocat.txt',data,err=>{if(err){console.error('error')}})
 //  })
 
+const card= fs.readFileSync(`${__dirname}/templates/template-card.html`,'utf-8');
+const overview= fs.readFileSync(`${__dirname}/templates/template-overview.html`,'utf-8');
+const product= fs.readFileSync(`${__dirname}/templates/template-product.html`,'utf-8');
 const data= fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8');
-const Jdata=JSON.parse(data)
+// const Jdata=JSON.parse(data)
  //////////////////////////////////////////////////////////////////////////
  const server = http.createServer((req,res)=>{
    const namePath = req.url
 if(namePath==='/' || namePath == '/overview'){
-  res.end("Hello from server overview")
+  res.writeHead(200,{'content-Type': 'text/html'})
+  res.end(overview)
 }else if (namePath =='/pro') {
   res.end("Hello from server Product")
 } else if(namePath===('/api')){
